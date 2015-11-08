@@ -21,7 +21,7 @@ module LetterOpener
 
       location = File.join(settings[:location], "#{Time.now.to_i}_#{Digest::SHA1.hexdigest(mail.encoded)[0..6]}")
       messages = Message.rendered_messages(location, mail)
-      Launchy.open("file:///#{URI.parse(URI.escape(messages.first.filepath))}")
+      Launchy.open("file:///#{URI.parse(URI.escape(messages.first.filepath))}") if settings[:preview_in_browser]
     end
   end
 end
